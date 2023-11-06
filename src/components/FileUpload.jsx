@@ -43,9 +43,13 @@ function FileUpload() {
   };
 
   return (
-    <div>
+    <div className="m-10 items-center">
       <h2>Upload File</h2>
-      <Dropzone onDrop={handleDrop}>
+      <button
+      type="button"
+      className="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+    >
+     <Dropzone onDrop={handleDrop}>
         {({ getRootProps, getInputProps }) => (
           <div {...getRootProps()} className="dropzone">
             <input {...getInputProps()} />
@@ -65,6 +69,9 @@ function FileUpload() {
           </div>
         )}
       </Dropzone>
+      <span className="mt-2 block text-sm font-semibold text-gray-900">Add new file to database</span>
+    </button>
+      
     </div>
   );
 }

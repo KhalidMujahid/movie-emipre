@@ -12,12 +12,13 @@ function App() {
 
   return (
     <Router>
-      <div className="bg-gray-900">
+      <div>
       <Routes>
         <Route path="/" element={isAuthenticated ? <Navigate to="/files" /> : <Home/>} />
         <Route path="/files" element={<FileList />} />
         <Route path="/upload" element={<FileUpload />} />
         <Route path="/file/:id" element={<FileDetails />} />
+        <Route path="/SignIn" element={<SignIn/>} />
       </Routes>
       </div>
     

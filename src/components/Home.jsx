@@ -10,6 +10,9 @@ import {
   } from '@heroicons/react/20/solid'
   import { BoltIcon, CalendarDaysIcon, UsersIcon } from '@heroicons/react/24/outline'
   import img from '../removebg.png'
+  import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+
+
   
   const primaryFeatures = [
     {
@@ -225,12 +228,14 @@ import {
                  Secure.safe.free
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
-                  <a
+                  <p
                     href="#"
                     className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
                   >
-                    Login
-                  </a>
+                   <Link to='/SignIn'>
+                            Login
+                    </Link>
+                  </p>
                 </div>
               </div>
               <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
@@ -382,12 +387,15 @@ import {
                 commodo do ea.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
-                <a
+                <p
                   href="#"
                   className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
-                 Login
-                </a>
+                    <Link to='/SignIn'>
+                            Login
+                    </Link>
+                 
+                </p>
               </div>
             </div>
           </div>
