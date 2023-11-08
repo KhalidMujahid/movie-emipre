@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import FileUpload from "./components/fileUpload";
+import FileUpload from "./components/FileUpload";
 import FileList from "./components/FileList";
 import FileDetails from "./components/FileDetails";
 import SignIn from "./components/SignIn"; // Import your SignUp component
