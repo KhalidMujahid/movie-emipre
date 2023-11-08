@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import Movie from "../models/movie";
 
 
 // add movie
@@ -7,7 +8,7 @@ async function addMovie(req: Request, res: Response, next: NextFunction){
 
 		const { movie_title,movie_desc,movie_image_front,movie_image_back } = req.body;
 
-		const movies = await User.create({movie_title,movie_desc,movie_image_front,movie_image_back})
+		const movies = await Movie.create({movie_title,movie_desc,movie_image_front,movie_image_back})
 
 		if(movies){
 			return res.status(201).send(movies);
@@ -24,7 +25,7 @@ async function addMovie(req: Request, res: Response, next: NextFunction){
 // get all moves
 async function getMovies(req: Request, res: Response, next: NextFunction){
 	try{
-		const movies = await User.find();
+		const movies = await Movie.find();
 		return res.status(200).send(movies);
 	} catch(error){
 		next(error);
@@ -37,7 +38,7 @@ async function getOneMovie(req: Request, res: Response, next: NextFunction){
 
 		const { id } = req.params;
 
-		const movie = await User.findById(id);
+		const movie = await Movie.findById(id);
 		return res.status(200).send(movie);
 
 	} catch(error){
@@ -60,7 +61,7 @@ async function deleteMovie(req: Request, res: Response, next: NextFunction){
 
 		const { id } = req.params;
 
-		await User.findByIdAndDelete(id,{ new: true })
+		await Movie.findByIdAndDelete(id,{ new: true })
 			.then(() => res.status(200).send({ message: "Movie deleted" }))
 			.catch(() => res.status(400).send({ message: "An error occured" }))
 
@@ -73,9 +74,11 @@ async function deleteMovie(req: Request, res: Response, next: NextFunction){
 async function updateMovie(req: Request, res: Response, next: NextFunction){
 	try{
 
+		const { id } = req.params;
+
 		const { movie_title,movie_desc,movie_image_front,movie_image_back } = req.body;
 
-		await User.findByIdAndUpdate(id,{ movie_title,movie_desc,movie_image_front,movie_image_back },{ new: true })
+		await Movie.findByIdAndUpdate(id,{ movie_title,movie_desc,movie_image_front,movie_image_back },{ new: true })
 			.then(() => res.status(200).send({ message: "Movie details updated!" }))
 			.catch(() => res.status(400).send({ message: "An error occured" }))
 	} catch(error){
