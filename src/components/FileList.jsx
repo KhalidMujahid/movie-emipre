@@ -1,7 +1,19 @@
-import React from "react";
+import React,{ useState,useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+import axios from "axios";
 
 function FileList() {
+  const [movies,setMovies] = useState([]);
+
+  async function fetchMovies(){
+    const response = await axios.get("http://127.0.0.1/api/movies");
+    setMovies(response.data);
+  }
+
+  useEffect(() => {
+    fetchMovies();
+  },[]);
+
   return (
     <div>
        <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
@@ -23,6 +35,9 @@ function FileList() {
       </div>
     </div>
       {/* Display a list of uploaded files */}
+      {movies.map(movie => (
+        //movies card here
+      ))}
     </div>
   );
 }

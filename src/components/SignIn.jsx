@@ -1,25 +1,32 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
-
+import axios from "axios";
 
 const SignIn = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [input, setInput] = useState({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
-  const handleSignIn = () => {
-    // Replace these default values with your actual authentication logic
-    const defaultUsername = "user";
-    const defaultPassword = "password";
+  const handleSignIn = async (e) => {
+    e.preventDefault();
 
-    if (username === defaultUsername && password === defaultPassword) {
-      // Successful sign-in, navigate to the FileList page
-      navigate("/files");
-    } else {
-      alert("Invalid username or password. Please try again.");
-    }
+    if(!input.email  || !input.password) return alert("All inputs are required!");
+
+    // Replace these default values with your actual authentication logic
+    await axios.post("http://127.0.0.1:3001/api/login",input)
+      .then(() => navigate("/files"))
+      .catch(error => alert(error.response.data.message))
+
   };
+
+  const handleChange = (e) => {
+    setInput({...input,
+      [e.target.name]: e.target.value
+    })
+  }
 
   return (
     <div>
@@ -36,7 +43,7 @@ const SignIn = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSignIn}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-black">
                 Email address
@@ -48,8 +55,8 @@ const SignIn = () => {
                   type="text"
                   autoComplete="email"
                   required
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={input.email}
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-black shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -71,8 +78,8 @@ const SignIn = () => {
                   id="password"
                   name="password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={input.password}
+                  onChange={handleChange}
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-black shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
@@ -83,7 +90,6 @@ const SignIn = () => {
             <div>
               <button
                 type="submit"
-                onClick={handleSignIn}
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Sign in
@@ -91,14 +97,14 @@ const SignIn = () => {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-400">
+          <div className="mt-10 text-center text-sm text-gray-400">
             <p href="#" className="font-semibold leading-6 text-indigo-400 hover:text-indigo-300">
                 <Link to='/'>
                         Go back
                 </Link>
              
             </p>
-          </p>
+          </div>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ function App() {
     <Router>
       <div>
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Navigate to="/files" /> : <Home/>} />
+        <Route path="/" element={<Home/>} />
         <Route path="/files" element={<FileList />} />
         <Route path="/upload" element={<FileUpload />} />
         <Route path="/file/:id" element={<FileDetails />} />
