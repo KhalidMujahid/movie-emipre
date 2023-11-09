@@ -1,21 +1,28 @@
 import { Router } from "express";
-import { addMovie,getMovies,getOneMovie,deleteMovie,updateMovie } from "../controllers/movie";
+import {
+  addMovie,
+  getMovies,
+  getOneMovie,
+  deleteMovie,
+  updateMovie,
+} from "../controllers/movie";
+import upload from "../utils/upload";
 
 const movieRouter: Router = Router();
 
 // get all movies
-movieRouter.get("/",getMovies);
+movieRouter.get("/", getMovies);
 
 // get single movie
-movieRouter.get("/:id",getOneMovie);
+movieRouter.get("/:id", getOneMovie);
 
 // add movie
-movieRouter.post("/",addMovie);
+movieRouter.post("/", upload.single("movie"), addMovie);
 
 // update single movie
-movieRouter.patch("/:id",updateMovie);
+movieRouter.patch("/:id", updateMovie);
 
 // delete all movies
-movieRouter.delete("/",deleteMovie);
+movieRouter.delete("/", deleteMovie);
 
 export default movieRouter;
