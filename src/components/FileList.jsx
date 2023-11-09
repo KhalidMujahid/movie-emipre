@@ -6,7 +6,7 @@ function FileList() {
   const [movies,setMovies] = useState([]);
 
   async function fetchMovies(){
-    const response = await axios.get("http://127.0.0.1/api/movies");
+    const response = await axios.get("http://127.0.0.1:3001/api/movies");
     setMovies(response.data);
   }
 

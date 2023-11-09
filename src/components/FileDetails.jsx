@@ -7,7 +7,7 @@ function FileDetails() {
   const [movie,setMovie] = useState({});
 
   async function fetchMovieDetail(){
-    const response = await axios.get(`http://127.0.0.1/api/movies/${id}`);
+    const response = await axios.get(`http://127.0.0.1:3001/api/movies/${id}`);
     if(response.status === 200){
       setMovie(response.data);
     }
