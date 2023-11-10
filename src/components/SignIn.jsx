@@ -8,17 +8,25 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  const [loading,setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    if(!input.email  || !input.password) return alert("All inputs are required!");
+    if(!input.email  || !input.password){
+      setLoading(false);
+      return alert("All inputs are required!");
+    }
 
     // Replace these default values with your actual authentication logic
-    await axios.post("http://127.0.0.1:3001/api/login",input)
+    await axios.post("https://movies-api-a6cx.onrender.com/api/login",input)
       .then(() => navigate("/files"))
-      .catch(error => alert(error.response.data.message))
+      .catch(error => {
+        setLoading(false);
+        alert(error.response.data.message)
+      })
 
   };
 
@@ -92,7 +100,7 @@ const SignIn = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
-                Sign in
+                {loading ?  <>Loading....</> : <>Sign in</>}
               </button>
             </div>
           </form>

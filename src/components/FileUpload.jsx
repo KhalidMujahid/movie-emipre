@@ -21,7 +21,7 @@ function FileUpload() {
     // acceptedFiles.forEach((file) => {
     //   formData.append("file", file);
     // });
-    // const response = await axios.post("/your-upload-endpoint", formData);
+    // const response = await axios.post("https://movies-api-a6cx.onrender.com/api/movies", formData);
 
     // Handle file upload progress and success/failure here.
     // You can update state to show progress and success messages.

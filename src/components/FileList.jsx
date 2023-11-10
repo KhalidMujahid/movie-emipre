@@ -6,7 +6,7 @@ function FileList() {
   const [movies,setMovies] = useState([]);
 
   async function fetchMovies(){
-    const response = await axios.get("http://127.0.0.1:3001/api/movies");
+    const response = await axios.get("https://movies-api-a6cx.onrender.com/api/movies");
     setMovies(response.data);
   }
 
@@ -37,6 +37,7 @@ function FileList() {
       {/* Display a list of uploaded files */}
       {movies.map(movie => (
         //movies card here
+        <div></div>
       ))}
     </div>
   );
