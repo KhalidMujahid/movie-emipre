@@ -6,13 +6,20 @@ import { IMovies } from "../interfaces/movie";
 // add movie
 async function addMovie(req: Request, res: Response, next: NextFunction) {
   try {
-    const { movie_title, movie_desc } = req.body;
+    const { movie_title, movie_desc, poster } = req.body;
 
-    const result: string = await cloud(req.file?.path);
+    const output = (req.files as Express.Multer.File[]).map(
+      (file: Express.Multer.File) => file?.path
+    );
+
+    console.log(output);
+
+    const result: string[] = await cloud(output);
 
     const movies = await Movie.create({
       movie_title,
       movie_desc,
+      poster,
       movie_file: result,
     });
 

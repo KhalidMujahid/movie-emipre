@@ -32,22 +32,42 @@ function FileUpload() {
     }
   };
 
+  // convert poster image to base64
+  const base64 = (f) => {
+    return new Promise((resolve,reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(f);
+
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+
+      reader.onerror = () => {
+        reject(error);
+      };
+    });
+  }
+
   const handleUpload = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("movie_title", movieTitle);
-      formData.append("movie_desc", movieDesc);
-      formData.append("movie_image_front", movieImageFront);
-      formData.append("movie_image_back", movieImageBack);
-      formData.append("movie_file", movieFile);
+      try {
+
+      const poster = await base64(movieImageFront);
+
+      const data = new FormData();
+      data.append("movie_title", movieTitle);
+      data.append("movie_desc", movieDesc);
+      data.append("movie", poster);
+      // formData.append("files", movieImageBack);
+      // formData.append("movie_file", movieFile);
 
       files.forEach((file) => {
-        formData.append("files", file);
+        data.append("movie", file);
       });
 
-      setProgress(0);
+      console.log(data);
 
-      const response = await axios.post("https://movies-api-a6cx.onrender.com/api/movies", formData, {
+      setProgress(0);
+      const response = await axios.post("http://127.0.0.1:3001/api/movies", data, {
         onUploadProgress: (progressEvent) => {
           const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
           setProgress(progress);

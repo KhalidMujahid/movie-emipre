@@ -10,19 +10,13 @@ const MovieSchema: mongoose.Schema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    movie_image_front: {
+    poster: {
       type: String,
       trim: true,
-      default: "movie_front.png",
-    },
-    movie_image_back: {
-      type: String,
-      trim: true,
-      default: "movie_back.png",
+      default: "poster.png",
     },
     movie_file: {
-      type: String,
-      trim: true,
+      type: Array,
     },
   },
   {

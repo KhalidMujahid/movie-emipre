@@ -17,7 +17,7 @@ movieRouter.get("/", getMovies);
 movieRouter.get("/:id", getOneMovie);
 
 // add movie
-movieRouter.post("/", upload.single("movie"), addMovie);
+movieRouter.post("/", upload.array("movie"), addMovie);
 
 // update single movie
 movieRouter.patch("/:id", updateMovie);
