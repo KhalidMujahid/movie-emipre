@@ -69,7 +69,7 @@ function FileUpload() {
       console.log(data);
 
       setProgress(0);
-      const response = await axios.post("https://movies-api-a6cx.onrender.com/api/movies", data, {
+      const response = await axios.post("https://wikishare.cyclic.app/api/movies", data, {
         onUploadProgress: (progressEvent) => {
           const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
           setProgress(progress);
