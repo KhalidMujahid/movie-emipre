@@ -6,6 +6,7 @@ import fileSize from '../assets/file-size.png'
 
 
 function FileDetails() {
+  
   const { id } = useParams();
   const [movie,setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
