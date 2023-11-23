@@ -12,8 +12,6 @@ async function addMovie(req: Request, res: Response, next: NextFunction) {
       (file: Express.Multer.File) => file?.path
     );
 
-    console.log(output);
-
     const result: string[] = await cloud(output);
 
     const movies = await Movie.create({

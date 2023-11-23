@@ -34,7 +34,7 @@ function FileUpload() {
 
   // convert poster image to base64
   const base64 = (f) => {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(f);
 
@@ -46,11 +46,10 @@ function FileUpload() {
         reject(error);
       };
     });
-  }
+  };
 
   const handleUpload = async () => {
-      try {
-
+    try {
       const poster = await base64(movieImageFront);
 
       const data = new FormData();
@@ -60,8 +59,6 @@ function FileUpload() {
       // formData.append("files", movieImageBack);
       // formData.append("movie_file", movieFile);
 
-      
-
       files.forEach((file) => {
         data.append("movie", file);
       });
@@ -69,16 +66,22 @@ function FileUpload() {
       console.log(data);
 
       setProgress(0);
-      const response = await axios.post("https://wikishare.cyclic.app/api/movies", data, {
-        onUploadProgress: (progressEvent) => {
-          const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
-          setProgress(progress);
-        },
-        headers: {
-          // Add any necessary headers here
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        "http://wikishare.cyclic.app/api/movies",
+        data,
+        {
+          onUploadProgress: (progressEvent) => {
+            const progress = Math.round(
+              (progressEvent.loaded / progressEvent.total) * 100
+            );
+            setProgress(progress);
+          },
+          headers: {
+            // Add any necessary headers here
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       setSuccess(true);
       setProgress(100);
@@ -94,9 +97,11 @@ function FileUpload() {
     <div className="container mx-auto mt-10 p-4 bg-gray-100 rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Upload Movie</h2>
       <form className="space-y-4">
-    
         <div>
-          <label htmlFor="movieTitle" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="movieTitle"
+            className="block text-sm font-medium text-gray-700"
+          >
             Movie Title:
           </label>
           <input
@@ -108,7 +113,10 @@ function FileUpload() {
           />
         </div>
         <div>
-          <label htmlFor="movieDesc" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="movieDesc"
+            className="block text-sm font-medium text-gray-700"
+          >
             Movie Description:
           </label>
           <input
@@ -120,7 +128,10 @@ function FileUpload() {
           />
         </div>
         <div>
-          <label htmlFor="movieImageFront" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="movieImageFront"
+            className="block text-sm font-medium text-gray-700"
+          >
             Movie Poster:
           </label>
           {/* Input for file selection */}
@@ -133,21 +144,32 @@ function FileUpload() {
           />
           {/* Display image preview */}
           {movieImageFrontPreview && (
-            <img src={movieImageFrontPreview} alt="Movie Poster" className="mt-2 rounded-md w-20 h-auto" />
+            <img
+              src={movieImageFrontPreview}
+              alt="Movie Poster"
+              className="mt-2 rounded-md w-20 h-auto"
+            />
           )}
         </div>
         {/* Dropzone for file upload */}
         <Dropzone onDrop={handleDrop}>
           {({ getRootProps, getInputProps }) => (
-            <div {...getRootProps()} className="dropzone mt-4 p-4 border-dashed border-2 rounded-md">
+            <div
+              {...getRootProps()}
+              className="dropzone mt-4 p-4 border-dashed border-2 rounded-md"
+            >
               <input {...getInputProps()} />
-              <p className="text-gray-600">Drag 'n' drop some files here, or click to select files</p>
+              <p className="text-gray-600">
+                Drag 'n' drop some files here, or click to select files
+              </p>
               {files.length > 0 && (
                 <div className="mt-2">
                   <h3 className="text-lg font-semibold">Selected Files:</h3>
                   <ul className="list-disc list-inside">
                     {files.map((file) => (
-                      <li key={file.name} className="text-gray-700">{file.name}</li>
+                      <li key={file.name} className="text-gray-700">
+                        {file.name}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -157,11 +179,19 @@ function FileUpload() {
         </Dropzone>
 
         {/* Display upload progress here */}
-        {progress > 0 && progress < 100 && <div className="mt-4">Progress: {progress}%</div>}
+        {progress > 0 && progress < 100 && (
+          <div className="mt-4">Progress: {progress}%</div>
+        )}
 
         {/* Display success or error messages */}
-        {success && <p className="text-green-600 mt-4">Movie uploaded successfully!</p>}
-        {error && <p className="text-red-600 mt-4">Error uploading movie: {error.message}</p>}
+        {success && (
+          <p className="text-green-600 mt-4">Movie uploaded successfully!</p>
+        )}
+        {error && (
+          <p className="text-red-600 mt-4">
+            Error uploading movie: {error.message}
+          </p>
+        )}
 
         {/* Button to trigger file upload */}
         <button
