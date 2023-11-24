@@ -6,7 +6,7 @@ function FileList() {
   const [movies,setMovies] = useState([]);
 
   async function fetchMovies(){
-    const response = await axios.get("https://wikishare.cyclic.app/api/movies");
+    const response = await axios.get("https://movie-apis-15yh.onrender.com/api/movies");
     setMovies(response.data);
     console.log(response.data);
   }

@@ -13,7 +13,7 @@ function FileDetails() {
   const [isLoading1, setIsLoading1] = useState(false);
 
   async function fetchMovieDetail(){
-    const response = await axios.get(`https://wikishare.cyclic.app/api/movies/${id}`);
+    const response = await axios.get(`https://movie-apis-15yh.onrender.com/api/movies/${id}`);
     if(response.status === 200){
       setMovie(response.data);
     }

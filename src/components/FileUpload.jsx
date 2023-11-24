@@ -67,7 +67,7 @@ function FileUpload() {
 
       setProgress(0);
       const response = await axios.post(
-        "http://wikishare.cyclic.app/api/movies",
+        "https://movie-apis-15yh.onrender.com/api/movies",
         data,
         {
           onUploadProgress: (progressEvent) => {
