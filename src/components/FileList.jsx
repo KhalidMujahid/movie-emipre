@@ -8,7 +8,6 @@ function FileList() {
   async function fetchMovies(){
     const response = await axios.get("https://movie-apis-15yh.onrender.com/api/movies");
     setMovies(response.data);
-    console.log(response.data);
   }
 
   useEffect(() => {
@@ -68,7 +67,7 @@ function FileList() {
               </h3>
               <p className="mt-1 text-sm text-gray-500">{movie.movie_desc}</p>
               <p className="mt-1 text-sm text-gray-500">Uploaded at:{movie.updatedAt}</p>
-              <p className="mt-1 text-sm text-gray-500 hidden">Download Link:{movie.movie_file}</p>
+              <p className="mt-1 text-sm text-gray-500 hidden">Download Link:{movie.movie_file[1].filesize}</p>
             </div>
           ))}
         </div>
