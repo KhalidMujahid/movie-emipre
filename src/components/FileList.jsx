@@ -67,7 +67,7 @@ function FileList() {
               </h3>
               <p className="mt-1 text-sm text-gray-500">{movie.movie_desc}</p>
               <p className="mt-1 text-sm text-gray-500">Uploaded at:{movie.updatedAt}</p>
-              <p className="mt-1 text-sm text-gray-500 hidden">Download Link:{movie.movie_file[1].filesize}</p>
+              <p className="mt-1 text-sm text-gray-500 hidden">Download Link:{movie.movie_file[1]?.filesize}</p>
             </div>
           ))}
         </div>
